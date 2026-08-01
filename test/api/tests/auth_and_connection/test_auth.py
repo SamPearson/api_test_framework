@@ -1,9 +1,5 @@
 import pytest
-import requests
-
 from test_utils.data_factories.api_user import APIUserFactory
-
-
 
 
 def test_login_failure(api_client):
@@ -13,7 +9,6 @@ def test_login_failure(api_client):
 
     assert not api_client.is_authenticated()
     assert api_client.token is None
-
 
 
 def test_register_success(api_client):
@@ -33,24 +28,6 @@ def test_register_success(api_client):
 
     # Clean up by deleting the user
     api_client.delete_account()
-
-
-
-# def test_register_duplicate_user(api_client):
-#     """Test registration with existing username"""
-#     user = APIUserFactory.create()
-#     # First register a user
-#     api_client.register(user)
-#     api_client.logout()  # Clear the session
-#
-#     user.password = APIUserFactory.generate_password()
-#
-#     # Try to register the same username again
-#     with pytest.raises(Exception) as exc_info:
-#         api_client.register(user)
-#
-#     # need to confirm the right exception or some kind of api feedback
-
 
 
 @pytest.fixture(autouse=True)
